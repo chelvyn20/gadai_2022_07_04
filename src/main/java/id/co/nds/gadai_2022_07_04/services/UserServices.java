@@ -33,7 +33,7 @@ public class UserServices {
 
 		userValidator.validatemaxLimit(
 				Double.parseDouble(userModel.getUserTxnLimit()));
-		userValidator.ValidateUserDescLength(userModel.getUserDecs());
+		userValidator.ValidateUserDescLength(userModel.getUserDecs());;
 		userValidator.ValidateUserMaxLimitLength(userModel.getUserTxnLimit());
 		userValidator.ValidateUserNameLength(userModel.getUserName());
 
@@ -68,7 +68,7 @@ public class UserServices {
 		}
 		user.setUserNotes(userModel.getUserDecs());
 
-		Date date1 = new SimpleDateFormat("yyyy/MM/dd")
+		Date date1 = new SimpleDateFormat("yyyy-MM-dd")
 				.parse(userModel.getUserRegDate());
 		user.setRegisterDate(date1);
 		user.setCreatedDate(new Timestamp(System.currentTimeMillis()));
@@ -138,7 +138,7 @@ public class UserServices {
 			user.setMaxLimit(Double.parseDouble(userModel.getUserTxnLimit()));
 		}
 		if (userModel.getUserRegDate() != null) {
-			Date date1 = new SimpleDateFormat("yyyy/MM/dd")
+			Date date1 = new SimpleDateFormat("yyyy-MM-dd")
 					.parse(userModel.getUserRegDate());
 			user.setRegisterDate(date1);
 		}

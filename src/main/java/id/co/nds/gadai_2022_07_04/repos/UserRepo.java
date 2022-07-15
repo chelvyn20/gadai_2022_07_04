@@ -1,10 +1,8 @@
 
 package id.co.nds.gadai_2022_07_04.repos;
 
-import java.util.List;
 import java.util.Optional;
 
-import org.apache.catalina.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
@@ -12,7 +10,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import id.co.nds.gadai_2022_07_04.entities.UserEntity;
-import id.co.nds.gadai_2022_07_04.globals.GlobalConstant;
+
 
 @Repository
 public interface UserRepo extends JpaRepository<UserEntity, String>,

@@ -9,7 +9,7 @@ import java.util.List;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
-import org.apache.catalina.connector.Response;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -32,7 +32,7 @@ import id.co.nds.gadai_2022_07_04.exceptions.NotFoundException;
 import id.co.nds.gadai_2022_07_04.models.ResponseModel;
 import id.co.nds.gadai_2022_07_04.models.UserModel;
 import id.co.nds.gadai_2022_07_04.services.UserServices;
-import id.co.nds.gadai_2022_07_04.validators.UserValidator;
+
 
 @RestController
 @Validated
