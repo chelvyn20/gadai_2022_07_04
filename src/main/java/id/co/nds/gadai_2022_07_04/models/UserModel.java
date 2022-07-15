@@ -57,7 +57,7 @@ public class UserModel {
     // @DateTimeFormat(fallbackPatterns = "yyyy-MM-dd")
     // @JsonFormat(pattern = "yyyy/MM/dd")
     @Pattern(regexp = "^[0-9]{4}-(02-(0[1-9]|[12][0-9])|(0[469]|11)-(0[1-9]|[12][0-9]|30)|(0[13578]|1[02])-(0[1-9]|[12][0-9]|3[01]))$", message = "Input Date correctly with yyyy/MM/DD format", groups = {
-            PostingNew.class})
+            PostingNew.class, UpdatingById.class })
 
     private String userRegDate;
 
