@@ -1,6 +1,13 @@
+<<<<<<< HEAD
 package id.co.nds.gadai_2022_07_04.globals;
 
 
+=======
+
+package id.co.nds.gadai_2022_07_04.globals;
+
+import java.text.ParseException;
+>>>>>>> user
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -16,7 +23,10 @@ import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RestController;
+=======
+>>>>>>> user
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
@@ -24,11 +34,17 @@ import id.co.nds.gadai_2022_07_04.exceptions.ClientException;
 import id.co.nds.gadai_2022_07_04.exceptions.NotFoundException;
 import id.co.nds.gadai_2022_07_04.models.ResponseModel;
 
+<<<<<<< HEAD
 
 
 @ControllerAdvice
 @RestController
 public class GlobalResponseEntityHandler extends ResponseEntityExceptionHandler {
+=======
+@ControllerAdvice
+public class GlobalResponseEntityHandler
+        extends ResponseEntityExceptionHandler {
+>>>>>>> user
 
     @ExceptionHandler({ ClientException.class })
     public ResponseEntity<Object> handleClientException(ClientException ex,
@@ -38,12 +54,20 @@ public class GlobalResponseEntityHandler extends ResponseEntityExceptionHandler 
         data.put("error", ex.getMessage());
 
         DateTimeFormatter dtf = DateTimeFormatter
+<<<<<<< HEAD
                 .ofPattern("yyyy/MM/dd HH:mm:ss");
+=======
+                .ofPattern("uuuu/MM/dd HH:mm:ss");
+>>>>>>> user
         LocalDateTime now = LocalDateTime.now();
         ResponseModel response = new ResponseModel();
         response.setResponseCode("400");
         response.setResponseMessage("Failed Request");
+<<<<<<< HEAD
         response.setResponseDescription(ex.getMessage());
+=======
+        response.setResponseDescription("Something Wrong Your Code");
+>>>>>>> user
         response.setResponseTime(dtf.format(now));
         response.setResponseData(data);
 
@@ -59,25 +83,59 @@ public class GlobalResponseEntityHandler extends ResponseEntityExceptionHandler 
         data.put("error", ex.getMessage());
 
         DateTimeFormatter dtf = DateTimeFormatter
+<<<<<<< HEAD
                 .ofPattern("yyyy/MM/dd HH:mm:ss");
+=======
+                .ofPattern("uuuu/MM/dd HH:mm:ss");
+>>>>>>> user
         LocalDateTime now = LocalDateTime.now();
         ResponseModel response = new ResponseModel();
         response.setResponseCode("400");
         response.setResponseMessage("Failed Request");
+<<<<<<< HEAD
         response.setResponseDescription(ex.getMessage());
+=======
+        response.setResponseDescription("Something Wrong Your Input");
+>>>>>>> user
         response.setResponseTime(dtf.format(now));
         response.setResponseData(data);
 
         return ResponseEntity.badRequest().body(response);
     }
 
+<<<<<<< HEAD
     
+=======
+    @ExceptionHandler({ ParseException.class })
+    public ResponseEntity<Object> handleParseException(ParseException ex,
+            WebRequest request) {
+
+        Map<String, String> data = new HashMap<>();
+        data.put("error", ex.getMessage());
+
+        DateTimeFormatter dtf = DateTimeFormatter
+                .ofPattern("uuuu/MM/dd HH:mm:ss");
+        LocalDateTime now = LocalDateTime.now();
+        ResponseModel response = new ResponseModel();
+        response.setResponseCode("400");
+        response.setResponseMessage("Failed Request");
+        response.setResponseDescription("Something Wrong Your Input");
+        response.setResponseTime(dtf.format(now));
+        response.setResponseData(data);
+
+        return ResponseEntity.badRequest().body(response);
+    }
+>>>>>>> user
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex, HttpHeaders headers,
             HttpStatus status, WebRequest request) {
+<<<<<<< HEAD
        
+=======
+        // TODO Auto-generated method stub
+>>>>>>> user
         Map<String, List<String>> data = new HashMap<>();
         List<String> errors = ex.getBindingResult().getFieldErrors().stream()
                 .map(DefaultMessageSourceResolvable::getDefaultMessage)
@@ -89,12 +147,20 @@ public class GlobalResponseEntityHandler extends ResponseEntityExceptionHandler 
         }
 
         DateTimeFormatter dtf = DateTimeFormatter
+<<<<<<< HEAD
                 .ofPattern("yyyy/MM/dd HH:mm:ss");
+=======
+                .ofPattern("uuuu/MM/dd HH:mm:ss");
+>>>>>>> user
         LocalDateTime now = LocalDateTime.now();
         ResponseModel response = new ResponseModel();
         response.setResponseCode("400");
         response.setResponseMessage("Failed Request");
+<<<<<<< HEAD
         response.setResponseDescription(ex.getMessage());
+=======
+        response.setResponseDescription("Something Wrong Your Input");
+>>>>>>> user
         response.setResponseTime(dtf.format(now));
         response.setResponseData(data);
         return ResponseEntity.badRequest().body(response);
@@ -104,17 +170,29 @@ public class GlobalResponseEntityHandler extends ResponseEntityExceptionHandler 
     protected ResponseEntity<Object> handleHttpRequestMethodNotSupported(
             HttpRequestMethodNotSupportedException ex, HttpHeaders headers,
             HttpStatus status, WebRequest request) {
+<<<<<<< HEAD
   
+=======
+        // TODO Auto-generated method stub
+>>>>>>> user
         Map<String, String> data = new HashMap<>();
         data.put("error", ex.getMessage());
 
         DateTimeFormatter dtf = DateTimeFormatter
+<<<<<<< HEAD
                 .ofPattern("yyyy/MM/dd HH:mm:ss");
+=======
+                .ofPattern("uuuu/MM/dd HH:mm:ss");
+>>>>>>> user
         LocalDateTime now = LocalDateTime.now();
         ResponseModel response = new ResponseModel();
         response.setResponseCode("400");
         response.setResponseMessage("Failed Request");
+<<<<<<< HEAD
         response.setResponseDescription(ex.getMessage());
+=======
+        response.setResponseDescription("Something Wrong Your Input");
+>>>>>>> user
         response.setResponseTime(dtf.format(now));
         response.setResponseData(data);
 
@@ -129,12 +207,20 @@ public class GlobalResponseEntityHandler extends ResponseEntityExceptionHandler 
         data.put("Error", ex.getMessage());
 
         DateTimeFormatter dtf = DateTimeFormatter
+<<<<<<< HEAD
                 .ofPattern("yyyy/MM/dd HH:mm:ss");
+=======
+                .ofPattern("uuuu/MM/dd HH:mm:ss");
+>>>>>>> user
         LocalDateTime now = LocalDateTime.now();
         ResponseModel response = new ResponseModel();
         response.setResponseCode("404");
         response.setResponseMessage("Failed Request");
+<<<<<<< HEAD
         response.setResponseDescription(ex.getMessage());
+=======
+        response.setResponseDescription("Something Wrong Your Input");
+>>>>>>> user
         response.setResponseTime(dtf.format(now));
         response.setResponseData(data);
 
@@ -146,12 +232,20 @@ public class GlobalResponseEntityHandler extends ResponseEntityExceptionHandler 
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex,
             Object body, HttpHeaders headers, HttpStatus status,
             WebRequest request) {
+<<<<<<< HEAD
        
+=======
+        // TODO Auto-generated method stub
+>>>>>>> user
         Map<String, String> data = new HashMap<>();
         data.put("error", ex.getMessage());
 
         DateTimeFormatter dtf = DateTimeFormatter
+<<<<<<< HEAD
                 .ofPattern("yyyy/MM/dd HH:mm:ss");
+=======
+                .ofPattern("uuuu/MM/dd HH:mm:ss");
+>>>>>>> user
         LocalDateTime now = LocalDateTime.now();
         ResponseModel response = new ResponseModel();
         response.setResponseCode("500");
