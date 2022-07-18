@@ -53,7 +53,7 @@ public class UserServices {
 			try {
 				user.setUser_phone(hasil);
 			} catch (Exception e) {
-				// TODO: handle exception
+				
 				throw new ClientException("User call number is already Exists");
 			}
 
@@ -61,7 +61,6 @@ public class UserServices {
 			try {
 				user.setUser_phone(userModel.getUserHp());
 			} catch (NumberFormatException e) {
-				// TODO: handle exception
 				throw new ClientException("User call number is already Exists");
 
 			}

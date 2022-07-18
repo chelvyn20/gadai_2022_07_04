@@ -1,21 +1,14 @@
 
 package id.co.nds.gadai_2022_07_04.models;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 
-import org.apache.logging.log4j.message.Message;
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 
-import id.co.nds.gadai_2022_07_04.controllers.GroupController.DeletingById;
 import id.co.nds.gadai_2022_07_04.controllers.GroupController.GettingAllByCriteria;
 import id.co.nds.gadai_2022_07_04.controllers.GroupController.PostingNew;
 import id.co.nds.gadai_2022_07_04.controllers.GroupController.UpdatingById;

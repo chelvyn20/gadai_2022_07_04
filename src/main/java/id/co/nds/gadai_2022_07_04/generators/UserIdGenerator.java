@@ -13,7 +13,6 @@ public class UserIdGenerator implements IdentifierGenerator {
 
     @Override
     public Serializable generate(SharedSessionContractImplementor ssci, Object o) throws HibernateException {
-        // TODO Auto-generated method stub
         Connection connection = ssci.connection();
 
         try {
@@ -31,7 +30,6 @@ public class UserIdGenerator implements IdentifierGenerator {
 				throw new HibernateException("Generator is failed to generate id");
 			}
         } catch (Exception e) {
-			//TODO: handle exception
 			e.printStackTrace();
         }
 
