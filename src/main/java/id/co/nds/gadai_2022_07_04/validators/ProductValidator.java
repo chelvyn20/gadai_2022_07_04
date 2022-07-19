@@ -6,21 +6,20 @@ import id.co.nds.gadai_2022_07_04.exceptions.ClientException;
 public class ProductValidator {
 
 	public void validateProductLTV(Double productLTV) throws ClientException {
-		if (productLTV < 0 || productLTV > 100) {
+		if (productLTV < 1 || productLTV > 100) {
 			throw new ClientException("product LTV count %(persen(1-100)) ");
 		}
 	}
 
-	
 	public void validateBABPersen(Double productBuka) throws ClientException {
-		if (productBuka < 0 || productBuka > 100) {
+		if (productBuka < 1 || productBuka > 100) {
 			throw new ClientException(
 					"Biaya Admin Buka count %(persen(1-100)) ");
 		}
 	}
 
 	public void validateBATPersen(Double productTutup) throws ClientException {
-		if (productTutup < 0 || productTutup > 100) {
+		if (productTutup < 1 || productTutup > 100) {
 			throw new ClientException(
 					"Biaya Admin Tutup count %(persen(1-100)) ");
 		}
