@@ -2,7 +2,6 @@
 package id.co.nds.gadai_2022_07_04.validators;
 
 import id.co.nds.gadai_2022_07_04.exceptions.ClientException;
-import id.co.nds.gadai_2022_07_04.globals.GlobalTypeProduct;
 
 public class ProductValidator {
 
@@ -12,14 +11,7 @@ public class ProductValidator {
 		}
 	}
 
-	// public void validateTypeProduct(String ProductType) throws ClientException {
-	// 	if (ProductType !="Konsinyasi Cicilan Tetap") {
-	// 		// if (ProductType != GlobalTypeProduct.FLEKSIBEL) {
-	// 		throw new ClientException("Product Type Not Found");
-
-	// 	}
-	// }
-
+	
 	public void validateBABPersen(Double productBuka) throws ClientException {
 		if (productBuka < 0 || productBuka > 100) {
 			throw new ClientException(

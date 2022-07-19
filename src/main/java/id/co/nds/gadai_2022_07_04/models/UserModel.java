@@ -1,7 +1,7 @@
 
 package id.co.nds.gadai_2022_07_04.models;
 
-import java.sql.Date;
+
 import java.sql.Timestamp;
 
 import javax.validation.constraints.NotBlank;
@@ -9,8 +9,6 @@ import javax.validation.constraints.Null;
 import javax.validation.constraints.Pattern;
 
 
-
-import id.co.nds.gadai_2022_07_04.controllers.GroupController.DeletingById;
 import id.co.nds.gadai_2022_07_04.controllers.GroupController.GettingAllByCriteria;
 import id.co.nds.gadai_2022_07_04.controllers.GroupController.PostingNew;
 import id.co.nds.gadai_2022_07_04.controllers.GroupController.UpdatingById;
