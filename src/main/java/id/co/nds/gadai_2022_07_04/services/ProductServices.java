@@ -33,8 +33,8 @@ public class ProductServices {
 
 		productValidator.validateProductLTV(productModel.getProductLTV());
 		productValidator.validateJangkaWaktu(
-		productModel.getProductJangkawaktu(),
-		productModel.getProductBiayaPenyPeriode());
+				productModel.getProductJangkawaktu(),
+				productModel.getProductBiayaPenyPeriode());
 
 		ProductEntity productEntity = new ProductEntity();
 		productEntity.setProductName(productModel.getProductName());
@@ -47,7 +47,6 @@ public class ProductServices {
 				productModel.getProductBiayaAdminBukaType());
 		productEntity.setBiayaAdmTutupType(
 				productModel.getProductBiayaAdminTutupType());
-		
 
 		if (productModel.getProductBiayaAdminBukaType().equals("PERSEN")) {
 			productValidator
@@ -67,6 +66,7 @@ public class ProductServices {
 					productModel.getProductBiayaAdminTutup());
 			productEntity.setBiayaAdmTutupVal(
 					productModel.getProductBiayaAdminTutup());
+					
 		} else if (productModel.getProductBiayaAdminBukaType()
 				.equals("NOMINAL")) {
 			productEntity.setBiayaAdmTutupVal(
@@ -86,7 +86,7 @@ public class ProductServices {
 		productEntity.setRecStatus(GlobalConstant.REC_STATUS_ACTIVE);
 
 		return productRepo.save(productEntity);
-		
+
 	}
 
 	public List<ProductEntity> findAllByCriteria(ProductModel productModel) {
@@ -117,9 +117,8 @@ public class ProductServices {
 
 		productValidator.validateProductLTV(productModel.getProductLTV());
 		productValidator.validateJangkaWaktu(
-		productModel.getProductJangkawaktu(),
-		productModel.getProductBiayaPenyPeriode());
-
+				productModel.getProductJangkawaktu(),
+				productModel.getProductBiayaPenyPeriode());
 
 		ProductEntity productEntity = new ProductEntity();
 		productEntity = findById(productModel.getProductid());
@@ -130,7 +129,7 @@ public class ProductServices {
 		productEntity.setProductTenor(productModel.getProductJangkawaktu());
 		productEntity.setBiayaAdmBukaType(
 				productModel.getProductBiayaAdminBukaType());
-		
+
 		productEntity.setBiayaAdmTutupType(
 				productModel.getProductBiayaAdminTutupType());
 
@@ -166,9 +165,10 @@ public class ProductServices {
 		productEntity
 				.setbDKeterlambatanRate(productModel.getProductBiayaDenda());
 		productEntity.setUpdatedDate(new Timestamp(System.currentTimeMillis()));
+		
 		productEntity.setUpdatedBy(productModel.getActorId() == null ? "1"
 				: productModel.getActorId());
-		
+
 		productEntity.setRecStatus(GlobalConstant.REC_STATUS_ACTIVE);
 
 		return productRepo.save(productEntity);

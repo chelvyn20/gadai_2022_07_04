@@ -163,7 +163,7 @@ public class GlobalResponseEntityHandler
                                 .body(response);
         }
 
-        @ExceptionHandler({ NotFoundException.class})
+        @ExceptionHandler({ NotFoundException.class })
         public ResponseEntity<Object> handleNotFoundException(
                         NotFoundException ex, WebRequest request) {
 
