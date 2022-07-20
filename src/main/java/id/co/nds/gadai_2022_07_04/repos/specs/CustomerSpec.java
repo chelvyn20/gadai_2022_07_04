@@ -43,7 +43,7 @@ public class CustomerSpec implements Specification<CustomerEntity>{
         if(customerModel.getCustJenisUsahaId()!=null && customerModel.getCustJenisUsahaId().length() > 0){
             p.getExpressions().add(cb.equal(root.get("custId"), customerModel.getCustJenisUsahaId()));
         }
-        if(customerModel.getActorId()!=null && customerModel.getActorId() != 0){
+        if(customerModel.getActorId()!=null && customerModel.getActorId() != "0"){
             p.getExpressions().add(cb.equal(root.get("custId"), customerModel.getActorId()));
         }
 

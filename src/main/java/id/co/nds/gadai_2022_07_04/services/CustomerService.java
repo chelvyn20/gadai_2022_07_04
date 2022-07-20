@@ -64,8 +64,8 @@ public class CustomerService implements Serializable {
         customer.setCustLimitTxn(customerModel.getCustLimitTxn());
         customer.setRecStatus(GlobalConstant.REC_STATUS_ACTIVE);
         customer.setCreatedDate(new Timestamp(System.currentTimeMillis()));
-        customer.setCreatorId(customerModel.getActorId() == null ? 0 : customerModel.getActorId());
-
+        customer.setCreatorId(customerModel.getActorId() == null ? "1"
+				: customerModel.getActorId());
         return customerRepo.save(customer);
     }
 
@@ -150,7 +150,7 @@ public class CustomerService implements Serializable {
         }
 
         customer.setUpdatedDate(new Timestamp(System.currentTimeMillis()));
-        customer.setUpdaterId(customerModel.getActorId() == null ? 0 : customerModel.getActorId());
+        customer.setUpdaterId(customerModel.getActorId() == null ? "0" : customerModel.getActorId());
 
         return customerRepo.save(customer);
     }
@@ -172,7 +172,7 @@ public class CustomerService implements Serializable {
         }
         customer.setRecStatus(GlobalConstant.REC_STATUS_NON_ACTIVE);
         customer.setDeletedDate(new Timestamp(System.currentTimeMillis()));
-        customer.setDeleterId(customerModel.getActorId() == null ? 0 : customerModel.getActorId());
+        customer.setDeleterId(customerModel.getActorId() == null ? "0" : customerModel.getActorId());
 
         return customerRepo.save(customer);
     }
