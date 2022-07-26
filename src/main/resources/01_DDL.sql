@@ -211,6 +211,7 @@ ALTER TABLE IF EXISTS public.tx_transaksi_cicilan_tetap
 CREATE TABLE IF NOT EXISTS public.tx_transaksi_barang
 (
     no_transaksi character varying COLLATE pg_catalog."default" NOT NULL,
+    no_urut INT NOT NULL.
     nama_barang character varying(30) COLLATE pg_catalog."default",
     kondisi character varying(150) COLLATE pg_catalog."default",
     jumlah numeric(3,0),
@@ -240,7 +241,7 @@ CREATE TABLE IF NOT EXISTS public.tx_cicilan
     tanggal_jatuh_tempo date,
     tanggal_bayar date,
     created_date timestamp without time zone,
-    CONSTRAINT tx_cicilan_pkey PRIMARY KEY (no_transaksi)
+    CONSTRAINT tx_cicilan_pkey PRIMARY KEY (no_transaksi, cicilan_ke)
 )
 
 TABLESPACE pg_default;
