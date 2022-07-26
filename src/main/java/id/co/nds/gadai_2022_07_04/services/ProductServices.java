@@ -81,6 +81,7 @@ public class ProductServices {
 		productEntity
 				.setbDKeterlambatanRate(productModel.getProductBiayaDenda());
 		productEntity.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+		productEntity.setUserId(productModel.getActorId());
 		productEntity.setCreatedBy(productModel.getActorId() == null ? "1"
 				: productModel.getActorId());
 		productEntity.setRecStatus(GlobalConstant.REC_STATUS_ACTIVE);
@@ -168,7 +169,7 @@ public class ProductServices {
 		
 		productEntity.setUpdatedBy(productModel.getActorId() == null ? "1"
 				: productModel.getActorId());
-
+		productEntity.setUserId(productModel.getActorId());
 		productEntity.setRecStatus(GlobalConstant.REC_STATUS_ACTIVE);
 
 		return productRepo.save(productEntity);

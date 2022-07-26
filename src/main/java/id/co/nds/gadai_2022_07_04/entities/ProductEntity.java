@@ -2,11 +2,15 @@
 package id.co.nds.gadai_2022_07_04.entities;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -18,9 +22,14 @@ public class ProductEntity {
 	@Id
 	@GenericGenerator(name = "product_id_seq", strategy = "id.co.nds.gadai_2022_07_04.generators.ProductIdGenerator")
 	@GeneratedValue(generator = "product_id_seq")
+	@JoinColumn(name = "product_id", referencedColumnName ="productId")
 	@Column(name = "product_id")
 	private String productId;
 
+	@JoinColumn(name = "user_id",referencedColumnName = "userId")
+	@Column(name = "user_id")
+	private String userId;
+	
 	@Column(name = "product_type")
 	private String productType;
 
@@ -59,6 +68,9 @@ public class ProductEntity {
 
 	@Column(name = "biaya_denda_keterlambatan_per")
 	private Integer BDKeterlambatanPer;
+
+	@OneToMany(targetEntity = TransaksiCicilanTetapEntity.class, mappedBy = "productId")
+	private List<TransaksiCicilanTetapEntity> transaksi;
 
 	@Column(name = "created_date")
 	private Timestamp createdDate;
@@ -198,5 +210,15 @@ public class ProductEntity {
 	public void setRecStatus(String recStatus) { this.recStatus = recStatus; }
 
     public void getBiayaJsPenyRate(Double productBiayaJasaPeny) {}
+
+	public List<TransaksiCicilanTetapEntity> getTransaksi() { return transaksi; }
+
+	public void setTransaksi(List<TransaksiCicilanTetapEntity> transaksi) {
+		this.transaksi = transaksi;
+	}
+
+	public String getUserId() { return userId; }
+
+	public void setUserId(String userId) { this.userId = userId; }
 
 }

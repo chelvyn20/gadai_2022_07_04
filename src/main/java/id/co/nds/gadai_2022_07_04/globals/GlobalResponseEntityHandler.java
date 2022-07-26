@@ -1,4 +1,3 @@
-
 package id.co.nds.gadai_2022_07_04.globals;
 
 import java.text.ParseException;

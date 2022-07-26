@@ -40,6 +40,29 @@ public class ProductSpec implements Specification<ProductEntity> {
 			p.getExpressions().add(cb.like(cb.lower(root.get("productName")),
 					"%" + productModel.getProductName().toLowerCase() + "%"));
 		}
+
+		if (productModel.getProductType() != null
+				&& productModel.getProductType().length() > 0) {
+
+			p.getExpressions().add(cb.like(cb.lower(root.get("producttType")),
+					"%" + productModel.getProductType().toLowerCase() + "%"));
+		}
+
+		if (productModel.getProductLTV() != null
+				&& productModel.getProductLTV() != 0) {
+
+			p.getExpressions().add(cb.equal(cb.lower(root.get("productLTV")),
+					productModel.getProductLTV()));
+		}
+		if (productModel.getProductBiayaJasaPeny() != null
+				&& productModel.getProductBiayaJasaPeny() != 0) {
+
+			p.getExpressions().add(cb.equal(cb.lower(root.get("productBiayaJasaPeny")),
+					productModel.getProductBiayaJasaPeny()));
+		}
+		
+		
+
 		if (productModel.getRecStatus() != null && (productModel.getRecStatus()
 				.trim().equalsIgnoreCase(GlobalConstant.REC_STATUS_ACTIVE)
 				|| productModel.getRecStatus().trim().equalsIgnoreCase(

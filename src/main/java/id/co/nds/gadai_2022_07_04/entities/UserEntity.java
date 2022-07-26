@@ -3,11 +3,13 @@ package id.co.nds.gadai_2022_07_04.entities;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -33,6 +35,18 @@ public class UserEntity {
 
     @Column(name = "max_limit")
     private Double maxLimit;
+
+    @OneToMany(targetEntity = ProductEntity.class, mappedBy = "userId")
+    List<ProductEntity> Products;
+
+    @OneToMany(targetEntity = TransaksiCicilanTetapEntity.class, mappedBy = "createdId")
+    List<TransaksiCicilanTetapEntity> transaksi;
+
+    public List<ProductEntity> getProducts() { return Products; }
+
+    public void setProducts(List<ProductEntity> products) {
+        Products = products;
+    }
 
     @Column(name = "register_date")
     private Date registerDate;
@@ -68,7 +82,9 @@ public class UserEntity {
 
     public String getUser_phone() { return user_phone; }
 
-    public void setUser_phone(String user_phone) { this.user_phone = user_phone; }
+    public void setUser_phone(String user_phone) {
+        this.user_phone = user_phone;
+    }
 
     public String getUserNotes() { return userNotes; }
 
@@ -118,5 +134,12 @@ public class UserEntity {
 
     public void setRecStatus(String recStatus) { this.recStatus = recStatus; }
 
-   
+    public List<TransaksiCicilanTetapEntity> getTransaksi() {
+        return transaksi;
+    }
+
+    public void setTransaksi(List<TransaksiCicilanTetapEntity> transaksi) {
+        this.transaksi = transaksi;
+    }
+
 }

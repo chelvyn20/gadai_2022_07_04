@@ -34,6 +34,7 @@ DROP TABLE IF EXISTS public.ms_customer;
 CREATE TABLE public.ms_customer
 (
     customer_id VARCHAR(10) NOT NULL,
+    user_id VARCHAR(15) NOT NULL,
     customer_name VARCHAR(30) COLLATE pg_catalog."default",
     customer_identity_no VARCHAR(16) COLLATE pg_catalog."default",
     customer_phone VARCHAR(50) COLLATE pg_catalog."default",
@@ -139,6 +140,7 @@ ALTER TABLE public.lg_activities
 CREATE TABLE public.ms_product
 (
     product_id character varying(20) NOT NULL,
+    user_id VARCHAR(15) NOT NULL,
     product_type character varying(30) NOT NULL,
     product_name character varying(50) NOT NULL,
     product_desc character varying(255),
@@ -195,6 +197,7 @@ CREATE TABLE IF NOT EXISTS public.tx_transaksi_cicilan_tetap
     customer_id character varying COLLATE pg_catalog."default",
     product_id character varying COLLATE pg_catalog."default",
     created_date timestamp without time zone,
+    created_id character varying COLLATE pg_catalog."default",
     CONSTRAINT tx_transaksi_cicilan_tetap_pkey PRIMARY KEY (no_transaksi)
 )
 
@@ -211,13 +214,13 @@ ALTER TABLE IF EXISTS public.tx_transaksi_cicilan_tetap
 CREATE TABLE IF NOT EXISTS public.tx_transaksi_barang
 (
     no_transaksi character varying COLLATE pg_catalog."default" NOT NULL,
+    no_urut INT NOT NULL,
     nama_barang character varying(30) COLLATE pg_catalog."default",
     kondisi character varying(150) COLLATE pg_catalog."default",
     jumlah numeric(3,0),
     harga_per_satuan numeric(10,2),
     CONSTRAINT tx_transaksi_barang_pkey PRIMARY KEY (no_urut, no_transaksi)
 )
-
 TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.tx_transaksi_barang
@@ -240,7 +243,7 @@ CREATE TABLE IF NOT EXISTS public.tx_cicilan
     tanggal_jatuh_tempo date,
     tanggal_bayar date,
     created_date timestamp without time zone,
-    CONSTRAINT tx_cicilan_pkey PRIMARY KEY (no_transaksi)
+    CONSTRAINT tx_cicilan_pkey PRIMARY KEY (no_transaksi,cicilan_ke)
 )
 
 TABLESPACE pg_default;
