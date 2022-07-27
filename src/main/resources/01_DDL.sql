@@ -248,5 +248,50 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.tx_cicilan
     OWNER to postgres;
-    
-    
+
+
+
+DROP TABLE IF EXISTS tx_denda_keterlambatan;
+
+
+CREATE TABLE tx_denda_keterlambatan(
+    denda_id VARCHAR (5) PRIMARY KEY NOT NULL,
+    no_transaksi VARCHAR (20) NOT NULL,
+    cicilan_ke INT4 NOT NULL,
+    tgl_denda DATE NOT NULL,
+    biaya_denda NUMERIC NOT NULL,
+    tgl_pembayaran_denda DATE NULL,
+    no_pembayaran NUMERIC NULL,
+   
+)WITH(
+    OIDS = FALSE
+);
+
+SELECT * FROM tx_denda_keterlambatan;
+
+
+
+DROP TABLE IF EXISTS ms_param;
+
+CREATE TABLE ms_param(
+    param_key VARCHAR(15) NOT NULL,
+    param_value VARCHAR(15) NOT NULL,
+    created_date TIMESTAMP NOT NULL DEFAULT NOW(),
+    creator_id VARCHAR(15) NOT NULL DEFAULT 0::INT4,
+    updated_date TIMESTAMP NULL,
+    updater_id VARCHAR(15) NULL,
+    deleted_date VARCHAR(15) NULL,
+    deleter_id TIMESTAMP NULL,
+    rec_status VARCHAR(1) NULL DEFAULT 'N'::VARCHAR
+) WITH (
+    OIDS=FALSE
+);
+
+SELECT * FROM ms_param;
+
+INSERT INTO ms_param(param_key, param_value)
+VALUES('CRON_10_Hari', '0 0 * * *');
+
+UPDATE ms_param
+SET param_value = '0 0 * * *'
+WHERE param_key = 'CRON_10_Hari';

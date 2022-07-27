@@ -2,6 +2,7 @@ package id.co.nds.gadai_2022_07_04.services;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ import id.co.nds.gadai_2022_07_04.entities.BarangEntity;
 import id.co.nds.gadai_2022_07_04.entities.CicilanEntity;
 import id.co.nds.gadai_2022_07_04.entities.CicilanTetapEntity;
 import id.co.nds.gadai_2022_07_04.entities.CustomerEntity;
+import id.co.nds.gadai_2022_07_04.entities.DendaKeterlambatanEntity;
 import id.co.nds.gadai_2022_07_04.entities.ProductEntity;
 import id.co.nds.gadai_2022_07_04.exceptions.ClientException;
 import id.co.nds.gadai_2022_07_04.exceptions.NotFoundException;
@@ -24,6 +26,7 @@ import id.co.nds.gadai_2022_07_04.repos.BarangRepo;
 import id.co.nds.gadai_2022_07_04.repos.CicilanRepo;
 import id.co.nds.gadai_2022_07_04.repos.CicilanTetapRepo;
 import id.co.nds.gadai_2022_07_04.repos.CustomerRepo;
+import id.co.nds.gadai_2022_07_04.repos.DendaKeterlambatanRepo;
 import id.co.nds.gadai_2022_07_04.repos.ProductRepo;
 import id.co.nds.gadai_2022_07_04.repos.specs.CicilanTetapSpec;
 import id.co.nds.gadai_2022_07_04.repos.specs.CustomerSpec;
@@ -48,6 +51,10 @@ public class TrxCicilanTetapService implements Serializable {
 
     @Autowired
     private BarangRepo barangRepo;
+
+    @Autowired
+    private DendaKeterlambatanRepo dendaRepo;
+
 
     CicilanTetapValidator cTetapValidator = new CicilanTetapValidator();
     BarangValidator barangValidator = new BarangValidator();
@@ -182,7 +189,7 @@ public class TrxCicilanTetapService implements Serializable {
         for(Integer i = 0; i < cicilanTetapModel.getDaftarBarangGadai().size(); i++) {
             barangValidator.notNullChekNoTransaksi(cicilanTetapModel.getDaftarBarangGadai().get(i).getNoTransaksi());
             barangValidator.nullCheckNamaBarang(cicilanTetapModel.getDaftarBarangGadai().get(i).getNamaBarang());
-            barangValidator.nullCheckDescBarang(cicilanTetapModel.getDaftarBarangGadai().get(i).getKondisi());
+            barangValidator.nullCheckKondisiBarang(cicilanTetapModel.getDaftarBarangGadai().get(i).getKondisi());
             barangValidator.nullCheckJumlahBarang(cicilanTetapModel.getDaftarBarangGadai().get(i).getJumlah());
             barangValidator.nullCheckHargaBarang(cicilanTetapModel.getDaftarBarangGadai().get(i).getHargaPerSatuan());
 
@@ -205,9 +212,9 @@ public class TrxCicilanTetapService implements Serializable {
             barang.setNoUrut(i+1);
             barang.setNoTransaksi(cicilanTetap.getNoTransaksi());
             barang.setNamaBarang(cicilanTetapModel.getDaftarBarangGadai().get(i).getNamaBarang());
-            barang.setKondisi(cicilanTetapModel.getDaftarBarangGadai().get(i).getKondisi());
             barang.setJumlah(cicilanTetapModel.getDaftarBarangGadai().get(i).getJumlah());
             barang.setHargaPerSatuan(cicilanTetapModel.getDaftarBarangGadai().get(i).getHargaPerSatuan());
+            barang.setKondisi(cicilanTetapModel.getDaftarBarangGadai().get(i).getKondisi());
             totalNilaiTaksiran += (cicilanTetapModel.getDaftarBarangGadai().get(i).getHargaPerSatuan() * cicilanTetapModel.getDaftarBarangGadai().get(i).getJumlah());
            
             daftarBarang.add(barang);
@@ -249,4 +256,54 @@ public class TrxCicilanTetapService implements Serializable {
         return cicilanTetapRepo.save(cicilanTetap);
         
     } 
+
+    public List<CicilanEntity> doCheckCicStatus() {
+        List<CicilanEntity> cicilan = new ArrayList<>();
+        cicilanRepo.findAll().forEach(cicilan::add);
+
+        for(Integer i = 0; i < cicilan.size(); i++) {
+            if (LocalDateTime.now().isBefore(cicilan.get(i).getTglAktif())) {
+                cicilan.get(i).setStatusTransaksi("BELUM AKTIF");
+            } 
+
+            else if (LocalDateTime.now().isAfter(cicilan.get(i).getTglAktif()) && LocalDateTime.now().isBefore(cicilan.get(i).getTglJatuhTempo()) ) {
+                cicilan.get(i).setStatusTransaksi("AKTIF");
+            } 
+
+            else if (LocalDateTime.now().isAfter(cicilan.get(i).getTglAktif()) && LocalDateTime.now().isAfter(cicilan.get(i).getTglJatuhTempo()) ) {
+                cicilan.get(i).setStatusTransaksi("TERLAMBAT");
+            } 
+
+            else if ( cicilan.get(i).getTglBayar() != null ) {
+                cicilan.get(i).setStatusTransaksi("LUNAS");
+            }
+
+            
+        }
+        cicilanRepo.saveAll(cicilan);
+
+        return cicilan;
+    }
+
+
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = {Exception.class})
+    public List<DendaKeterlambatanEntity> doHitungDenda() {
+        List<CicilanEntity> cicilan = new ArrayList<>();
+        cicilanRepo.findAll().forEach(cicilan::add);
+
+        for(Integer i = 0; i < cicilan.size(); i++) {
+            if (cicilan.get(i).getStatusTransaksi().equalsIgnoreCase("TERLAMBAT")) {
+                DendaKeterlambatanEntity denda = new DendaKeterlambatanEntity();
+
+                denda.setNoTransaksi(cicilan.get(i).getNoTransaksi());
+                denda.setCicilanKe(cicilan.get(i).getCicilanKe());
+                denda.setTglDenda(LocalDate.now());
+                denda.setBiayaDenda(cicilan.get(i).getTxPokok() * 0.0123);
+                dendaRepo.save(denda);
+            }
+        }
+
+        return null;
+    }
+
 }

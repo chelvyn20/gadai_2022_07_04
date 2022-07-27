@@ -24,9 +24,9 @@ public class BarangValidator {
         }
     }
 
-    public void nullCheckDescBarang(String desk) throws ClientException {
-        if(desk == null) {
-            throw new ClientException("Deskripsi barang tidak boleh kosong");
+    public void nullCheckKondisiBarang(String kondisi) throws ClientException {
+        if(kondisi == null) {
+            throw new ClientException("Kondisi barang tidak boleh kosong");
         }
     }
 
