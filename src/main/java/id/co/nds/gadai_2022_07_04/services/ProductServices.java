@@ -35,6 +35,9 @@ public class ProductServices {
 		productValidator.validateJangkaWaktu(
 				productModel.getProductJangkawaktu(),
 				productModel.getProductBiayaPenyPeriode());
+		productValidator.validatePERSEN(productModel.getProductBiayaDenda());
+		productValidator.validatePERSEN(productModel.getProductBiayaJasaPeny());
+
 
 		ProductEntity productEntity = new ProductEntity();
 		productEntity.setProductName(productModel.getProductName());
@@ -104,6 +107,14 @@ public class ProductServices {
 
 		ProductEntity product = productRepo.findById(id).orElse(null);
 		productValidator.nullCheckObject(id);
+
+		return product;
+	}
+
+	public List<ProductEntity> findAll() {
+		
+		List<ProductEntity> product = new ArrayList<>();
+		productRepo.findAll().forEach(product::add);
 
 		return product;
 	}

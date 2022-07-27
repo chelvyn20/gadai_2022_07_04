@@ -90,7 +90,7 @@ public class TransaksiService {
 
 	TransaksiValidator transaksiValidator = new TransaksiValidator();
 
-	public List<TransaksiCicilanTetapEntity> findAllTransaksiTesting() {
+	public List<TransaksiCicilanTetapEntity> findAllTransaksi() {
 
 		List<TransaksiCicilanTetapEntity> transaksi = new ArrayList<>();
 		transaksiRepo.findAllTransaksiCustomerProduct().forEach(transaksi::add);
@@ -369,15 +369,17 @@ public class TransaksiService {
 			} else {
 				cicilan.setTxStatus("BELUM AKTIF");
 			}
-			LocalDateTime tgl = cicilanTgl.plusMonths(i + 1);
-
-			LocalDateTime tglJatuhTem = tgl.minusDays(1);
-			Date TanggalAktif = Date
-					.from(tgl.atZone(ZoneId.systemDefault()).toInstant());
-			Date TanggalJatuhTemp = Date.from(
-					tglJatuhTem.atZone(ZoneId.systemDefault()).toInstant());
-			cicilan.setTanggalAktif(TanggalAktif);
-			cicilan.setTanggalJatuhTempo(TanggalJatuhTemp);
+			
+				LocalDateTime tgl = cicilanTgl.plusMonths(i);
+				LocalDateTime tgljatuhTemp = cicilanTgl.plusMonths(i + 1);
+				LocalDateTime tglJatuhTem = tgljatuhTemp.minusDays(1);
+				Date TanggalAktif = Date
+						.from(tgl.atZone(ZoneId.systemDefault()).toInstant());
+				Date TanggalJatuhTemp = Date.from(
+						tglJatuhTem.atZone(ZoneId.systemDefault()).toInstant());
+				cicilan.setTanggalAktif(TanggalAktif);
+				cicilan.setTanggalJatuhTempo(TanggalJatuhTemp);
+			
 
 			// listcicilan.add(cicilan);
 

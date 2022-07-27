@@ -252,3 +252,21 @@ ALTER TABLE IF EXISTS public.tx_cicilan
     OWNER to postgres;
     
     
+CREATE TABLE IF NOT EXISTS public.tx_denda_keterlambatan
+(
+    id_denda character varying COLLATE pg_catalog."default" NOT NULL,
+    no_transaksi character varying COLLATE pg_catalog."default" NOT NULL,
+    cicilan_ke numeric,
+    tx_bunga numeric,
+    tgl_denda date,
+    biaya_denda numeric,
+    tgl_pembayaran_denda date,
+    no_pembayaran VARCHAR(50),
+    created_date timestamp without time zone,
+    CONSTRAINT tx_cicilan_pkey PRIMARY KEY (id_denda)
+)
+
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.tx_dendan_keterlambatan
+    OWNER to postgres;

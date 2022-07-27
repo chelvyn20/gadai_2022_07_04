@@ -33,6 +33,12 @@ public class ProductValidator {
 		}
 	}
 
+	public void validatePERSEN(Double persen) throws ClientException {
+		if (persen < 1 || persen > 100) {
+			throw new ClientException("product LTV count %(persen(1-100)) ");
+		}
+	}
+
 	public void nullCheckObject(Object o) throws ClientException {
 
 		if (o == null) {

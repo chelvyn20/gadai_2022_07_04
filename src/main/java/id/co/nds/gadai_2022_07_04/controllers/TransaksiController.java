@@ -178,10 +178,9 @@ public class TransaksiController {
 	}
 
 	@GetMapping(value = "/get")
-	public ResponseEntity<ResponseModel> getAllTransaksiController(
-			@RequestBody TransaksiModel transaksiModel) throws ClientException {
+	public ResponseEntity<ResponseModel> getAllTransaksiController() throws ClientException {
 		List<TransaksiCicilanTetapEntity> transaksi = transaksiService
-				.findAll(transaksiModel);
+				.findAllTransaksi();
 
 		DateTimeFormatter dtf = DateTimeFormatter
 				.ofPattern("uuuu/MM/dd HH:mm:ss");
