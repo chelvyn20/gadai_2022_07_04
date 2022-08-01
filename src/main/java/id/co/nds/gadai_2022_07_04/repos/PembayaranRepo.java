@@ -5,11 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import id.co.nds.gadai_2022_07_04.entities.ProductGetListEntity;
+import id.co.nds.gadai_2022_07_04.entities.PembayaranEntity;
 
 @Repository
-public interface GetListProductRepo
-		extends JpaRepository<ProductGetListEntity, String>,
-		JpaSpecificationExecutor<ProductGetListEntity> {
+public interface PembayaranRepo extends JpaRepository<PembayaranEntity, String>,
+		JpaSpecificationExecutor<PembayaranEntity> {
 
+	
 }

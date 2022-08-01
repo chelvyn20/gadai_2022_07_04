@@ -176,6 +176,7 @@ ALTER TABLE public.ms_product
 
 -- DROP TABLE IF EXISTS public.tx_transaksi_cicilan_tetap;
 
+DROP TABLE tx_transaksi_cicilan_tetap;
 CREATE TABLE IF NOT EXISTS public.tx_transaksi_cicilan_tetap
 (
     no_transaksi character varying COLLATE pg_catalog."default" NOT NULL,
@@ -194,6 +195,7 @@ CREATE TABLE IF NOT EXISTS public.tx_transaksi_cicilan_tetap
     total_biaya_jasa_peny numeric,
     tx_biaya_adm_tutup numeric,
     total_pengem numeric,
+    status_tx VARCHAR(50),
     customer_id character varying COLLATE pg_catalog."default",
     product_id character varying COLLATE pg_catalog."default",
     created_date timestamp without time zone,
@@ -211,6 +213,7 @@ ALTER TABLE IF EXISTS public.tx_transaksi_cicilan_tetap
 
 -- DROP TABLE IF EXISTS public.tx_transaksi_barang;
 
+DROP TABLE tx_transaksi_barang;
 CREATE TABLE IF NOT EXISTS public.tx_transaksi_barang
 (
     no_transaksi character varying COLLATE pg_catalog."default" NOT NULL,
@@ -228,10 +231,12 @@ ALTER TABLE IF EXISTS public.tx_transaksi_barang
 
 
 
+
 -- Table: public.tx_cicilan
 
 -- DROP TABLE IF EXISTS public.tx_cicilan;
 
+DROP TABLE tx_cicilan;
 CREATE TABLE IF NOT EXISTS public.tx_cicilan
 (
     no_transaksi character varying COLLATE pg_catalog."default" NOT NULL,
@@ -242,6 +247,7 @@ CREATE TABLE IF NOT EXISTS public.tx_cicilan
     tanggal_aktif date,
     tanggal_jatuh_tempo date,
     tanggal_bayar date,
+    no_pembayaran VARCHAR(50),
     created_date timestamp without time zone,
     CONSTRAINT tx_cicilan_pkey PRIMARY KEY (no_transaksi,cicilan_ke)
 )
@@ -250,8 +256,8 @@ TABLESPACE pg_default;
 
 ALTER TABLE IF EXISTS public.tx_cicilan
     OWNER to postgres;
-    
-    
+
+DROP TABLE tx_denda_keterlambatan;
 CREATE TABLE IF NOT EXISTS public.tx_denda_keterlambatan
 (
     id_denda character varying COLLATE pg_catalog."default" NOT NULL,
@@ -263,10 +269,34 @@ CREATE TABLE IF NOT EXISTS public.tx_denda_keterlambatan
     tgl_pembayaran_denda date,
     no_pembayaran VARCHAR(50),
     created_date timestamp without time zone,
-    CONSTRAINT tx_cicilan_pkey PRIMARY KEY (id_denda)
+    CONSTRAINT tx_denda_keterlambatanpkey PRIMARY KEY (id_denda)
 )
 
 TABLESPACE pg_default;
 
-ALTER TABLE IF EXISTS public.tx_dendan_keterlambatan
+ALTER TABLE IF EXISTS public.tx_denda_keterlambatan
+    OWNER to postgres;
+
+DROP TABLE IF EXISTS public.tx_pembayaran_h;
+
+CREATE TABLE public.tx_pembayaran_h
+(
+    no_pembayaran VARCHAR(50) NOT NULL,
+    no_transaksi VARCHAR(50) COLLATE pg_catalog."default",
+    total_tagihan_cicilan numeric,
+    total_tagihan_denda numeric ,
+    biaya_adm_tutup NUMERIC ,
+	total_tagihan NUMERIC ,
+    pembulatan NUMERIC,
+    kembalian numeric,
+    jumlah_pembayaran numeric ,
+    metode_bayar VARCHAR(200),
+    CONSTRAINT tx_pembayaran_pkey PRIMARY KEY (no_pembayaran)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE IF EXISTS public.tx_pembayaran_h
     OWNER to postgres;

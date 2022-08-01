@@ -369,17 +369,16 @@ public class TransaksiService {
 			} else {
 				cicilan.setTxStatus("BELUM AKTIF");
 			}
-			
-				LocalDateTime tgl = cicilanTgl.plusMonths(i);
-				LocalDateTime tgljatuhTemp = cicilanTgl.plusMonths(i + 1);
-				LocalDateTime tglJatuhTem = tgljatuhTemp.minusDays(1);
-				Date TanggalAktif = Date
-						.from(tgl.atZone(ZoneId.systemDefault()).toInstant());
-				Date TanggalJatuhTemp = Date.from(
-						tglJatuhTem.atZone(ZoneId.systemDefault()).toInstant());
-				cicilan.setTanggalAktif(TanggalAktif);
-				cicilan.setTanggalJatuhTempo(TanggalJatuhTemp);
-			
+
+			LocalDateTime tgl = cicilanTgl.plusMonths(i);
+			LocalDateTime tgljatuhTemp = cicilanTgl.plusMonths(i + 1);
+			LocalDateTime tglJatuhTem = tgljatuhTemp.minusDays(1);
+			Date TanggalAktif = Date
+					.from(tgl.atZone(ZoneId.systemDefault()).toInstant());
+			Date TanggalJatuhTemp = Date.from(
+					tglJatuhTem.atZone(ZoneId.systemDefault()).toInstant());
+			cicilan.setTanggalAktif(TanggalAktif);
+			cicilan.setTanggalJatuhTempo(TanggalJatuhTemp);
 
 			// listcicilan.add(cicilan);
 
@@ -408,6 +407,16 @@ public class TransaksiService {
 		return transaksi;
 	}
 
+	public List<TransaksiInfoEntity> findAllByTransaksiCust(String noTransaksi,
+			String custId) {
+
+		List<TransaksiInfoEntity> transaksi = new ArrayList<>();
+		transaksiInfoRepo.findTransaksibyTransaksiCustomer(noTransaksi, custId)
+				.forEach(transaksi::add);
+
+		return transaksi;
+	}
+
 	public List<TransaksiGetDetailEntity> GetDetailTransaksiCicilanTetap(
 			String noTransaksi) {
 		List<TransaksiGetDetailEntity> transaksi = new ArrayList<>();
@@ -424,5 +433,15 @@ public class TransaksiService {
 		productValidator.nullCheckObject(id);
 
 		return product;
+	}
+
+	public TransaksiCicilanTetapEntity findByIds(String id)
+			throws ClientException, NotFoundException {
+
+		TransaksiCicilanTetapEntity transaksi = transaksiRepo.findById(id)
+				.orElse(null);
+		// productValidator.nullCheckObject(id);
+
+		return transaksi;
 	}
 }

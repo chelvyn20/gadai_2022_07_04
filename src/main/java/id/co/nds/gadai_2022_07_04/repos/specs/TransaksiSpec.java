@@ -15,8 +15,6 @@ public class TransaksiSpec
 
 	private TransaksiModel transaksiModel;
 
-	
-
 	public TransaksiSpec(TransaksiModel transaksiModel) {
 		super();
 		this.transaksiModel = transaksiModel;
@@ -44,7 +42,6 @@ public class TransaksiSpec
 		// 			.add(cb.equal(root.get(String.format("tanggal_tx")),
 		// 					transaksiModel.getTrxDateBegin()));
 		// }
-		
 		if (transaksiModel.getCustId() != null
 				&& transaksiModel.getCustId().length() != 0) {
 			p.getExpressions()

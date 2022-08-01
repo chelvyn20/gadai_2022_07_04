@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 import java.util.Date;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -86,6 +87,9 @@ public class TransaksiCicilanTetapEntity {
 	@JoinColumn(name = "product_id", referencedColumnName = "productId")
 	@Column(name = "product_id")
 	private String productId;
+
+	@Column(name = "status_tx")
+	private String statusTx;
 
 
 	@Column(name = "created_date")
@@ -223,5 +227,11 @@ public class TransaksiCicilanTetapEntity {
 	public void setTxBiayaJasaPenyPer(Double txBiayaJasaPenyPer) {
 		this.txBiayaJasaPenyPer = txBiayaJasaPenyPer;
 	}
+
+	public static Optional<ProductEntity> findById(String id) { return null; }
+
+	public String getStatusTx() { return statusTx; }
+
+	public void setStatusTx(String statusTx) { this.statusTx = statusTx; }
 
 }

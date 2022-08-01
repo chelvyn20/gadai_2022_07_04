@@ -54,7 +54,6 @@ public class TransaksiController {
 	@Autowired
 	private ProductServices productServices;
 
-
 	@GetMapping(value = "/doSearchPelanggan")
 	public ResponseEntity<ResponseModel> searchPelangganController(
 			@RequestBody CustomerModel customerModel) {
@@ -76,7 +75,8 @@ public class TransaksiController {
 
 	@GetMapping(value = "/doGetListProduct/{id}")
 	public ResponseEntity<ResponseModel> SearchListProductController(
-			@PathVariable("id") String id) throws ClientException, NotFoundException {
+			@PathVariable("id") String id)
+			throws ClientException, NotFoundException {
 
 		ProductGetListEntity productEntity = transaksiService.findById(id);
 
@@ -153,8 +153,8 @@ public class TransaksiController {
 	}
 
 	@PostMapping(value = "/doSave")
-	public ResponseEntity<ResponseModel> DoSaveTransaksiController(@Validated(PostingNew.class)
-			@RequestBody TransaksiModel transaksiModel)
+	public ResponseEntity<ResponseModel> DoSaveTransaksiController(
+			@Validated(PostingNew.class) @RequestBody TransaksiModel transaksiModel)
 			throws ClientException, NotFoundException {
 
 		// List<TransaksiCicilanTetapEntity> findTransaksi = transaksiService
@@ -177,10 +177,10 @@ public class TransaksiController {
 
 	}
 
-	@GetMapping(value = "/get")
-	public ResponseEntity<ResponseModel> getAllTransaksiController() throws ClientException {
-		List<TransaksiCicilanTetapEntity> transaksi = transaksiService
-				.findAllTransaksi();
+	@GetMapping(value = "/get/{id}")
+	public ResponseEntity<ResponseModel> getAllTransaksiController(
+			@PathVariable String id) throws ClientException, NotFoundException {
+		TransaksiCicilanTetapEntity transaksi = transaksiService.findByIds(id);
 
 		DateTimeFormatter dtf = DateTimeFormatter
 				.ofPattern("uuuu/MM/dd HH:mm:ss");

@@ -1,4 +1,3 @@
-
 package id.co.nds.gadai_2022_07_04.entities;
 
 import java.sql.Timestamp;
@@ -6,18 +5,18 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
+
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "tx_transaksi_cicilan_tetap")
 public class TransaksiInfoEntity {
 	@Id
-	// @GenericGenerator(name = "transaksi_id_seq", strategy = "id.co.nds.gadai_2022_07_04.generators.TransaksiIdGenerator")
+	// @GenericGenerator(name = "transaksi_id_seq", strategy =
+	// "id.co.nds.gadai_2022_07_04.generators.TransaksiIdGenerator")
 	// @GeneratedValue(generator = "transaksi_id_seq")
 	@Column(name = "no_transaksi")
 	private String noTransaksi;
@@ -77,6 +76,9 @@ public class TransaksiInfoEntity {
 
 	@Column(name = "product_name")
 	private String productName;
+
+	@Column(name = "status_tx")
+	private String statusTx;
 
 	@Column(name = "created_date")
 	private Timestamp createdDate;
@@ -194,4 +196,8 @@ public class TransaksiInfoEntity {
 	public void setCreatedDate(Timestamp createdDate) {
 		this.createdDate = createdDate;
 	}
+
+	public String getStatusTx() { return statusTx; }
+
+	public void setStatusTx(String statusTx) { this.statusTx = statusTx; }
 }

@@ -19,7 +19,8 @@ public interface TransaksiBarangRepo
 
 	static boolean existsById(String string) { return false; }
 
-	@Query(value ="SELECT * FROM tx_transaksi_barang WHERE no_transaksi = ?1", nativeQuery = true)
+	@Query(value = "SELECT * FROM tx_transaksi_barang WHERE no_transaksi = ?1"
+	, nativeQuery = true)
 	List<TransaksiBarangEntity> findNoTransaksi(String noTransaksi);
 	
 }
