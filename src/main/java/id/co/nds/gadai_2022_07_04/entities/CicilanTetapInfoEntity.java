@@ -8,7 +8,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -16,8 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 @Entity
 @Table(name = "tx_transaksi_cicilan_tetap")
-public class CicilanTetapEntity {
-    
+public class CicilanTetapInfoEntity {
     @Id
     @GenericGenerator(name = "transaksi_no_seq", strategy = "id.co.nds.gadai_2022_07_04.generators.TransactionNoGenerator")
     @GeneratedValue(generator = "transaksi_no_seq")
@@ -75,13 +73,17 @@ public class CicilanTetapEntity {
     @Column(name = "status")
     private String status;
 
-    @JoinColumn(name = "customer_id", referencedColumnName = "id")
     @Column(name = "customer_id")
     private String custId;
 
-    @JoinColumn(name = "product_id", referencedColumnName = "id")
+    @Column(name = "customer_name")
+    private String custName;
+
     @Column(name = "product_id")
     private String productId;
+
+    @Column(name = "product_name")
+    private String productName;
 
     @OneToMany(targetEntity = CicilanEntity.class, mappedBy = "noTransaksi")
     private List<CicilanEntity> daftarCicilan;
@@ -241,12 +243,28 @@ public class CicilanTetapEntity {
         this.custId = custId;
     }
 
+    public String getCustName() {
+        return custName;
+    }
+
+    public void setCustName(String custName) {
+        this.custName = custName;
+    }
+
     public String getProductId() {
         return productId;
     }
 
     public void setProductId(String productId) {
         this.productId = productId;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
     public List<CicilanEntity> getDaftarCicilan() {
@@ -264,9 +282,4 @@ public class CicilanTetapEntity {
     public void setCreatedDate(Timestamp createdDate) {
         this.createdDate = createdDate;
     }
-
-    
-
-   
-
 }

@@ -20,7 +20,7 @@ import id.co.nds.gadai_2022_07_04.services.TrxCicilanTetapService;
 
 
 
-@Component
+// @Component
 public class DbParamScheduler implements SchedulingConfigurer {
 
     @Autowired
